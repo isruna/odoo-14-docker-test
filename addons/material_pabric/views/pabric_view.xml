@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+    <record model="ir.ui.view" id="view_material_pabric_form">
+        <field name="name">material.pabric.form</field>
+        <field name="model">material.pabric</field>
+        <field name="arch" type="xml">
+            <form string="Material Pabric">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="material_code" class="oe_inline"/>
+                            <field name="name" />
+                            <field name="material_type" />
+                            <field name="material_buy_price" widget="monetary" options="{'currency_field': 'currency_id'}" />
+                            <field name="supplier" />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_material_pabric_tree">
+    <field name="name">material.pabric.tree</field>
+    <field name="model">material.pabric</field>
+    <field name="arch" type="xml">
+        <tree string="Material Pabric">
+            <field name="material_code"/>
+            <field name="name"/>
+            <field name="material_type"/>
+            <field name="material_buy_price"/>
+            <field name="supplier"/>
+        </tree>
+    </field>
+    </record>
+
+    <record id="material_pabric_search_view" model="ir.ui.view">
+        <field name="name">material.pabric.select</field>
+        <field name="model">material.pabric</field>
+        <field name="arch" type="xml">
+            <search string="Search material">
+                <field name="name"/>
+                <field name="material_code"/>
+                <field name="material_type"/>
+                <field name="material_buy_price"/>
+                <field name="supplier"/>
+                <filter string="Material Type Fabric" name="material_type" domain="[('material_type', 'ilike','fabric')]"/>
+                <filter string="Material Type Jeans" name="material_type" domain="[('material_type', 'ilike','jeans')]"/>
+                <filter string="Material Type Cotton" name="material_type" domain="[('material_type', 'ilike','cotton')]"/>             	
+            <group expand="0" string="Group By...">
+                <filter string="Material Type" name="material_type" domain="[]" context="{'group_by':'material_type'}"/>
+            </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_open_material_pabric" model="ir.actions.act_window">
+        <field name="name">Material Pabric</field>
+        <field name="res_model">material.pabric</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_mode">tree,form,kanban</field>
+        <field name="search_view_id" ref="material_pabric_search_view"/>
+    </record>
+
+    <menuitem id="menu_material_pabric_new" name="Material Pabric" action="action_open_material_pabric" sequence="-1"/>
+</data>
+</odoo>
